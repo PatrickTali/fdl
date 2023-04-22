@@ -1,2 +1,4 @@
-__pycache__
 rangers_env
+migrations
+.env
+__pycache__
