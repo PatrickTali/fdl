@@ -18,14 +18,59 @@
 
 <header class="hero-section">
     <h3 class="header-text">Welcome to Cars, {{ current_user.email }}</h3>
+    <main class="container car_form">
+        <div class="row">
+            <aside class="col-12 col-md-6">
+                <h2>Create A Car!</h2>
+                {% include 'car_form.html' %}
+            </aside>
+        </div>
+    </main>
 </header>
 
 <div class="container">
     <h3>Here are your profile details:</h3>
     <li class="list-group-item">Email: {{ current_user.email }}</li>
     <li class="list-group-item">Token: {{ current_user.token }}</li>
+    <div class="row mt-4">
+        {% for car in cars %}
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src=""alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ car.make }} ${{ car.model }}</h5>
+                            <p class="card-text">{{ car.price }}</p>
+                            <p>{{ car.random_joke }}</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+        
+            </div>
+        </div>
+        
+        
+        
+        
+        
+                    
+                
+                    
+                    
+                    
+        
+    
+    
+
+    </div>
 </div>
 
 
 
+
 {% endblock content %}
+
+
+
+

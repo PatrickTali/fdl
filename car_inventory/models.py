@@ -57,23 +57,25 @@ class User(db.Model, UserMixin):
     
 
 class Car(db.Model):
-    car_id = db.Column(db.String, primary_key = True)
+    id = db.Column(db.String, primary_key = True)
     make= db.Column(db.String(25), nullable=True)
-    price = db.Column(db.Numeric(precision=10, scale=2))
     model = db.Column(db.String(25), nullable=True)
+    price = db.Column(db.Numeric(precision=10, scale=2))
     year = db.Column(db.Integer, nullable=True)
     vin = db.Column(db.String(50))
-    customer_id = db.Column(db.Integer)
+    random_joke = db.Column(db.String, nullable=True)
+    user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable=False)
    
 
-    def __init__(self, car_id, price, make, model, year, vin, customer_id):
-        self.car_id = self.car_id()
+    def __init__(self, make, model, price, year, vin, random_joke, user_token):
+        self.id = self.set_id()
         self.make = make
         self.model = model
         self.price = price
         self.year = year
         self.vin = vin
-        self.customer_id = customer_id
+        self.random_joke = random_joke
+        self.user_token = user_token
        
 
     def set_id(self):
@@ -86,8 +88,7 @@ class Car(db.Model):
 
 class CarSchema(ma.Schema): 
     class Meta:
-        fields = ['id', 'name', 'description', 'price',  
-                  '','series','random_joke']
+        fields = ['id', 'make', 'model', 'price', 'year', 'vin','random_joke']
 
 car_schema = CarSchema()
-car_schema = CarSchema(many = True)
+cars_schema = CarSchema(many = True)

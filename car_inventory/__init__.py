@@ -3,6 +3,8 @@ from config import Config
 from .site.routes import site
 from .authentication.routes import auth
 from .models import db as root_db, login_manager, ma
+from car_inventory.helpers import JSONEncoder
+from .api.routes import api
 
 from flask_migrate import Migrate
 from flask_cors import CORS
@@ -14,6 +16,7 @@ app = Flask(__name__)
 
 app.register_blueprint(site)
 app.register_blueprint(auth)
+app.register_blueprint(api)
 
 app.config.from_object(Config)
 
@@ -25,6 +28,8 @@ ma.init_app(app)
 
 login_manager.init_app(app)
 login_manager.login_view = 'auth.signin'
+
+app.json_encoder = JSONEncoder
 
 CORS(app)
 
